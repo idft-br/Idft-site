@@ -5,3 +5,4 @@ dist/
 .env
 _shot-*
 _rev-*
+.tmp-canvas/
