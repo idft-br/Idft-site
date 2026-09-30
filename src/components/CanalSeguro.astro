@@ -1,0 +1,40 @@
+---
+import Arrow from './Arrow.astro';
+---
+<section id="canal" class="band band--ink canal" aria-labelledby="canal-title">
+  <div class="container canal__grid">
+    <div class="canal__text">
+      <span class="eyebrow eyebrow--lime canal__eyebrow">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.2 8.2-8 9-4.8-.8-8-4.5-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg>
+        Canal seguro de informações
+      </span>
+      <h2 id="canal-title" class="display-m">Você tem provas de desvios e ilicitudes no Pará?</h2>
+      <p>Um canal seguro criptografado para envio de informações e documentos importantes. O sigilo da fonte é compromisso do IDFT.</p>
+      <div class="canal__marks">
+        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Criptografia de ponta a ponta</span>
+        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18"/><path d="M10.6 10.6a3 3 0 0 0 4.2 4.2"/><path d="M9.9 5.1A10.5 10.5 0 0 1 12 5c5 0 9 4 10 7-.5 1.3-1.4 2.7-2.7 3.9"/><path d="M6.1 6.1C4 7.5 2.6 9.5 2 12c1 3 5 7 10 7 1.5 0 2.9-.3 4.1-.9"/></svg>Sem registro de IP</span>
+        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.2 8.2-8 9-4.8-.8-8-4.5-8-9V6l8-3z"/></svg>Proteção à fonte</span>
+      </div>
+    </div>
+    <div class="canal__actions">
+      <a href="/canal-seguro" class="btn btn--lime">Enviar informação com segurança <Arrow /></a>
+      <a href="/canal-seguro#como-funciona" class="btn btn--outline-paper">Saiba mais sobre o funcionamento do sistema</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .canal { padding: 64px 0; }
+  .canal__grid { display: grid; grid-template-columns: 1fr 440px; gap: 56px; align-items: center; }
+  .canal__text { display: flex; flex-direction: column; gap: 16px; }
+  .canal__text h2 { color: var(--paper); max-width: 640px; }
+  .canal__text p { font-size: 16px; line-height: 1.55; color: var(--muted-2); max-width: 620px; }
+  .canal__eyebrow { display: inline-flex; align-items: center; gap: 10px; }
+  .canal__marks { display: flex; flex-wrap: wrap; gap: 10px 22px; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; color: var(--muted-2); }
+  .canal__marks span { display: inline-flex; align-items: center; gap: 6px; }
+  .canal__actions { display: flex; flex-direction: column; gap: 12px; }
+  @media (max-width: 900px) {
+    .canal__grid { grid-template-columns: 1fr; gap: 28px; }
+    .canal__actions .btn { width: 100%; }
+  }
+</style>

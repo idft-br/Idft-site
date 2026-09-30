@@ -1,0 +1,26 @@
+<section class="band band--lime boletim" aria-labelledby="boletim-title">
+  <div class="container boletim__grid">
+    <div class="boletim__text">
+      <h2 id="boletim-title" class="display-s">Um olhar independente e rigoroso, na sua caixa de entrada.</h2>
+      <p>Quinzenalmente, novas apurações, andamentos e informações em seu e-mail.</p>
+    </div>
+    <form class="boletim__form" action="#" method="post">
+      <label for="boletim-email" class="sr-only">Seu e-mail</label>
+      <input id="boletim-email" name="email" type="email" placeholder="seu@email.com" autocomplete="email" required />
+      <button type="submit" class="btn btn--ink">Assinar</button>
+    </form>
+  </div>
+</section>
+
+<style>
+  .boletim { padding: 44px 0; }
+  .boletim__grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; }
+  .boletim__text { display: flex; flex-direction: column; gap: 8px; }
+  .boletim__text p { color: var(--ink-2); }
+  .boletim__form { display: flex; gap: 12px; }
+  .boletim__form input { flex-grow: 1; min-height: 52px; border: 1.5px solid var(--ink); border-radius: 999px; padding: 0 20px; background: var(--paper); color: var(--ink); }
+  @media (max-width: 800px) {
+    .boletim__grid { grid-template-columns: 1fr; gap: 20px; }
+    .boletim__form { flex-direction: column; }
+  }
+</style>

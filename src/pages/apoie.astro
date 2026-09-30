@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Apoie o IDFT · IDFT" description="Formas de apoiar o trabalho do instituto: voluntariado de juristas e analistas de dados, divulgação e contribuições.">
+  <section class="section">
+    <div class="container pagina">
+      <span class="eyebrow">Participe</span>
+      <h1 class="display-xl">Apoie o IDFT</h1>
+      <p class="lead">Formas de apoiar o trabalho do instituto: voluntariado de juristas e analistas de dados, divulgação e contribuições.</p>
+      <div class="corpo">
+        <h2>Voluntariado: juristas e dados</h2><p>Escreva para <a href="mailto:idft.br@proton.me">idft.br@proton.me</a> com uma breve apresentação e a área em que pode contribuir.</p>
+        <h2>Contribuições</h2><p>Em preparação.</p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .pagina { max-width: 860px; display: flex; flex-direction: column; gap: 20px; }
+  .corpo { display: flex; flex-direction: column; gap: 20px; margin-top: 16px; }
+  .corpo :global(h2) { font-size: 28px; margin-top: 24px; padding-bottom: 10px; border-bottom: 2px solid var(--ink); }
+  .corpo :global(p), .corpo :global(li) { font-size: 17px; line-height: 1.6; color: var(--ink-2); }
+  .corpo :global(.item) { display: flex; flex-direction: column; gap: 8px; padding: 22px 0; border-bottom: 1px solid var(--rule); }
+  .corpo :global(.item h3) { font-size: 24px; }
+  .corpo :global(.nota) { background: var(--paper-2); border-left: 4px solid var(--lime); padding: 14px 18px; border-radius: 6px; }
+</style>

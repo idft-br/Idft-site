@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Painéis e bases para consulta · IDFT" description="Arrecadação, despesas, dados sociais e outras bases do Pará, com filtros por ano, órgão e município e exportação do recorte escolhido em CSV.">
+  <section class="section">
+    <div class="container pagina">
+      <span class="eyebrow">Dados</span>
+      <h1 class="display-xl">Painéis e bases para consulta</h1>
+      <p class="lead">Arrecadação, despesas, dados sociais e outras bases do Pará, com filtros por ano, órgão e município e exportação do recorte escolhido em CSV.</p>
+      <div class="corpo">
+        <div class="item" id="arrecadacao"><h3>Arrecadação</h3><p>Receitas do Estado por fonte e por ano, em valores nominais e corrigidos pelo IPCA. Em preparação.</p></div>
+        <div class="item" id="despesas"><h3>Despesas</h3><p>Gastos por função, órgão e credor, incluindo os contratos com organizações sociais. Em preparação.</p></div>
+        <div class="item" id="dados-sociais"><h3>Dados sociais</h3><p>Indicadores de saúde, educação, saneamento e renda para leitura conjunta com o orçamento. Em preparação.</p></div>
+        <div class="item" id="outros"><h3>Outros</h3><p>Bases complementares usadas nas investigações, com dicionário de dados e fonte. Em preparação.</p></div>
+        <p class="nota">Todos os painéis oferecerão o download do recorte filtrado em CSV e o acesso às bases completas, com o SHA-256 de cada arquivo.</p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .pagina { max-width: 860px; display: flex; flex-direction: column; gap: 20px; }
+  .corpo { display: flex; flex-direction: column; gap: 20px; margin-top: 16px; }
+  .corpo :global(h2) { font-size: 28px; margin-top: 24px; padding-bottom: 10px; border-bottom: 2px solid var(--ink); }
+  .corpo :global(p), .corpo :global(li) { font-size: 17px; line-height: 1.6; color: var(--ink-2); }
+  .corpo :global(.item) { display: flex; flex-direction: column; gap: 8px; padding: 22px 0; border-bottom: 1px solid var(--rule); }
+  .corpo :global(.item h3) { font-size: 24px; }
+  .corpo :global(.nota) { background: var(--paper-2); border-left: 4px solid var(--lime); padding: 14px 18px; border-radius: 6px; }
+</style>

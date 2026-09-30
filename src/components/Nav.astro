@@ -1,0 +1,72 @@
+---
+const links = [
+  { href: '/#diagonal', label: 'Projeto Diagonal' },
+  { href: '/temas', label: 'Temas' },
+  { href: '/iniciativas', label: 'Iniciativas' },
+  { href: '/dados', label: 'Dados' },
+  { href: '/temas/08-bora-belem', label: 'Bora Belém' },
+  { href: '/videos', label: 'Vídeos' },
+  { href: '/sobre', label: 'Sobre' },
+];
+const path = Astro.url.pathname;
+---
+<header class="nav">
+  <div class="container nav__inner">
+    <a href="/" class="brand" aria-label="IDFT — página inicial">
+      <img src="/img/idft-symbol.png" alt="" width="44" height="44" />
+      <span class="brand__text">
+        <span class="brand__name">IDFT</span>
+        <span class="brand__tag">Interesse público · Pará</span>
+      </span>
+    </a>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu">
+      <svg width="20" height="20" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M2 4.5h14M2 9h14M2 13.5h14"/></svg>
+    </button>
+    <nav id="menu" class="nav__menu" aria-label="Principal">
+      {links.map((l) => (
+        <a href={l.href} aria-current={path === l.href ? 'page' : undefined}>{l.label}</a>
+      ))}
+      <a href="/apoie" class="btn btn--blue nav__cta">Apoie o IDFT</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .nav { border-bottom: 1px solid var(--rule); background: var(--paper); position: sticky; top: 0; z-index: 20; }
+  .nav__inner { min-height: 88px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .brand { display: flex; align-items: center; gap: 14px; }
+  .brand img { width: 44px; height: 44px; border-radius: 6px; }
+  .brand__text { display: flex; flex-direction: column; gap: 2px; }
+  .brand__name { font-family: var(--font-display); font-weight: 800; font-size: 26px; line-height: 1; letter-spacing: -0.01em; }
+  .brand__tag { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  .nav__menu { display: flex; align-items: center; gap: 28px; font-size: 15px; font-weight: 600; }
+  .nav__menu a[aria-current="page"] { border-bottom: 3px solid var(--lime); padding-bottom: 4px; }
+  .nav__cta { padding: 12px 22px; min-height: 44px; font-size: 15px; }
+  .nav__cta[aria-current="page"] { border-bottom: 0; padding-bottom: 12px; }
+  .nav__toggle { display: none; width: 44px; height: 44px; border: 1.5px solid var(--ink); background: transparent; border-radius: 999px; align-items: center; justify-content: center; cursor: pointer; color: var(--ink); }
+  @media (max-width: 1100px) {
+    .nav__menu { gap: 18px; font-size: 14px; }
+    .brand__tag { display: none; }
+  }
+  @media (max-width: 800px) {
+    .nav__inner { min-height: 64px; flex-wrap: wrap; }
+    .brand img { width: 36px; height: 36px; }
+    .brand__name { font-size: 22px; }
+    .nav__toggle { display: inline-flex; }
+    .nav__menu { display: none; flex-basis: 100%; flex-direction: column; align-items: stretch; gap: 0; padding: 8px 0 16px; }
+    .nav__menu.is-open { display: flex; }
+    .nav__menu a { padding: 14px 4px; border-top: 1px solid var(--rule); min-height: 48px; display: flex; align-items: center; }
+    .nav__menu a[aria-current="page"] { border-bottom: 0; border-left: 3px solid var(--lime); padding-left: 10px; }
+    .nav__cta { margin-top: 12px; border-top: 0 !important; justify-content: center; }
+  }
+</style>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('.nav__toggle');
+  const menu = document.getElementById('menu');
+  btn?.addEventListener('click', () => {
+    const open = menu?.classList.toggle('is-open') ?? false;
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+  });
+</script>

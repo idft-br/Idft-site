@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Vídeos · IDFT" description="Vídeos de apresentação do Projeto Diagonal e das investigações do IDFT.">
+  <section class="section">
+    <div class="container pagina">
+      <span class="eyebrow">Para ver e compreender</span>
+      <h1 class="display-xl">Vídeos</h1>
+      <p class="lead">Vídeos de apresentação do Projeto Diagonal e das investigações do IDFT.</p>
+      <div class="corpo">
+        <p class="nota">O primeiro vídeo — a apresentação do Projeto Diagonal — será publicado em breve.</p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .pagina { max-width: 860px; display: flex; flex-direction: column; gap: 20px; }
+  .corpo { display: flex; flex-direction: column; gap: 20px; margin-top: 16px; }
+  .corpo :global(h2) { font-size: 28px; margin-top: 24px; padding-bottom: 10px; border-bottom: 2px solid var(--ink); }
+  .corpo :global(p), .corpo :global(li) { font-size: 17px; line-height: 1.6; color: var(--ink-2); }
+  .corpo :global(.item) { display: flex; flex-direction: column; gap: 8px; padding: 22px 0; border-bottom: 1px solid var(--rule); }
+  .corpo :global(.item h3) { font-size: 24px; }
+  .corpo :global(.nota) { background: var(--paper-2); border-left: 4px solid var(--lime); padding: 14px 18px; border-radius: 6px; }
+</style>

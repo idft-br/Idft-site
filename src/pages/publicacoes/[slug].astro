@@ -1,0 +1,39 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const pubs = await getCollection('publicacoes', ({ data }) => !data.draft);
+  return pubs.map((p) => ({ params: { slug: p.id }, props: { pub: p } }));
+}
+const { pub } = Astro.props;
+const { Content } = await render(pub);
+const temas = await getCollection('temas');
+const tema = temas.find((t) => t.id === pub.data.tema);
+const fmt = (d: Date) => d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+---
+<Base title={`${pub.data.title} · IDFT`} description={pub.data.summary} image={tema?.data.ampla}>
+  <article class="section">
+    <div class="container artigo">
+      <header class="artigo__head">
+        {tema && <a href={`/temas/${tema.id}`} class="eyebrow">Tema {tema.data.n} · {tema.data.title}</a>}
+        <h1 class="display-l">{pub.data.title}</h1>
+        <p class="lead">{pub.data.summary}</p>
+        <p class="meta">{pub.data.kind} · {fmt(pub.data.date)}{pub.data.author ? ` · ${pub.data.author}` : ''}</p>
+      </header>
+      <div class="prose"><Content /></div>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .artigo { max-width: 760px; }
+  .artigo__head { display: flex; flex-direction: column; gap: 16px; padding-bottom: 28px; border-bottom: 2px solid var(--ink); margin-bottom: 32px; }
+  .meta { font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+  .prose :global(p) { font-size: 18px; line-height: 1.65; margin-bottom: 20px; }
+  .prose :global(h2) { font-size: 28px; margin: 40px 0 14px; }
+  .prose :global(h3) { font-size: 22px; margin: 28px 0 10px; }
+  .prose :global(a) { color: var(--blue); text-decoration: underline; }
+  .prose :global(blockquote) { margin: 24px 0; padding: 4px 0 4px 20px; border-left: 4px solid var(--lime); color: var(--muted); }
+  .prose :global(ul), .prose :global(ol) { padding-left: 24px; margin-bottom: 20px; font-size: 18px; line-height: 1.6; }
+</style>

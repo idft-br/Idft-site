@@ -1,0 +1,16 @@
+---
+n: "09"
+title: "Atuação no campo"
+short: "Campo"
+line: "Incêndios de casas de ribeirinhos, desmatamento, trabalho escravo e milícias em presentes de centenas de milhões."
+ampla: "/img/temas/09-campo-ampla.jpg"
+compacta: "/img/temas/09-campo-compacta.jpg"
+alt: "Atuação no campo: casa ribeirinha em área desmatada"
+order: 9
+---
+
+Incêndios de casas de ribeirinhos, desmatamento, trabalho escravo e milícias em presentes de centenas de milhões.
+
+## O que reunimos neste tema
+
+Conteúdo em preparação: investigações, peças jurídicas e bases de dados serão publicadas aqui à medida que forem revisadas.

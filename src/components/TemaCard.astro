@@ -1,0 +1,27 @@
+---
+import Arrow from './Arrow.astro';
+interface Props { n: string; title: string; line: string; ampla: string; alt: string; href: string }
+const { n, title, line, ampla, alt, href } = Astro.props;
+---
+<a href={href} class="tema">
+  <img class="tema__img" src={ampla} alt={alt} width="1200" height="800" loading="lazy" />
+  <div class="tema__body">
+    <div class="tema__text">
+      <span class="eyebrow">{n}</span>
+      <span class="tema__title">{title}</span>
+      <span class="tema__line">{line}</span>
+    </div>
+    <span class="circle-arrow"><Arrow /></span>
+  </div>
+</a>
+
+<style>
+  .tema { display: flex; flex-direction: column; gap: 14px; color: var(--ink); }
+  .tema__img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; transition: transform .22s ease; }
+  .tema:hover .tema__img { transform: translateY(-6px); }
+  .tema:hover .circle-arrow { background: var(--blue); border-color: var(--blue); color: var(--paper); }
+  .tema__body { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+  .tema__text { display: flex; flex-direction: column; gap: 5px; }
+  .tema__title { font-family: var(--font-display); font-weight: 700; font-size: 22px; line-height: 1.1; letter-spacing: -0.01em; }
+  .tema__line { font-size: 14px; line-height: 1.4; color: var(--muted); }
+</style>

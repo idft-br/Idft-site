@@ -1,0 +1,100 @@
+/* IDFT — sistema visual «colagem editorial» (Home v3)
+   Cores medidas nas próprias colagens: papel, azul, lima, coral. */
+:root {
+  --paper: #F3EFE5;
+  --paper-2: #EAE4D8;
+  --paper-3: #F8F5EE;
+  --ink: #15171E;
+  --ink-2: #2A2D3A;
+  --muted: #4A4D5C;
+  --muted-2: #B9BCCB;
+  --rule: #D9D3C4;
+  --blue: #1755C5;
+  --blue-soft: #DCE4F7;
+  --lime: #D3E33A;
+  --coral: #EE7759;
+  --red: #E5322D;
+
+  --font-display: 'Bricolage Grotesque', 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --font-text: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+
+  --container: 1280px;
+  --gutter: 80px;
+  --radius: 12px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
+a:hover { color: var(--blue); }
+h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); font-weight: 800; letter-spacing: -0.02em; line-height: 1; }
+p { margin: 0; }
+button, input { font: inherit; }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---- utilitários ---- */
+.container { width: min(var(--container), calc(100% - 2 * var(--gutter))); margin: 0 auto; }
+.eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); }
+.eyebrow--muted { color: var(--muted); }
+.eyebrow--lime { color: var(--lime); }
+.lead { font-size: 20px; line-height: 1.5; color: var(--muted); }
+.muted { color: var(--muted); }
+.display-xl { font-size: clamp(42px, 5.4vw, 76px); line-height: 0.96; letter-spacing: -0.025em; }
+.display-l { font-size: clamp(36px, 4.2vw, 60px); line-height: 0.98; }
+.display-m { font-size: clamp(30px, 3.2vw, 44px); }
+.display-s { font-size: clamp(24px, 2.4vw, 32px); }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 12px; padding: 16px 26px; border-radius: 999px; font-weight: 700; font-size: 16px; min-height: 52px; border: 1.5px solid transparent; cursor: pointer; transition: transform .15s ease, background .15s ease, color .15s ease; }
+.btn:hover { transform: translateY(-1px); }
+.btn--blue { background: var(--blue); color: var(--paper); }
+.btn--blue:hover { color: var(--paper); background: #1247a8; }
+.btn--lime { background: var(--lime); color: var(--ink); }
+.btn--lime:hover { color: var(--ink); background: #c6d72e; }
+.btn--ink { background: var(--ink); color: var(--paper); }
+.btn--ink:hover { color: var(--paper); }
+.btn--outline { border-color: var(--ink); color: var(--ink); background: transparent; }
+.btn--outline:hover { color: var(--blue); border-color: var(--blue); }
+.btn--outline-paper { border-color: rgba(243,239,229,.5); color: var(--paper); background: transparent; }
+.btn--outline-paper:hover { color: var(--lime); border-color: var(--lime); }
+.btn svg { flex-shrink: 0; }
+
+.link-arrow { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14px; }
+.circle-arrow { flex-shrink: 0; width: 36px; height: 36px; border-radius: 999px; border: 1.5px solid var(--ink); display: inline-flex; align-items: center; justify-content: center; transition: background .15s, color .15s, border-color .15s; }
+
+.section { padding: 80px 0; }
+.section--tight { padding: 56px 0; }
+.section-head { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end; margin-bottom: 44px; }
+.section-head > p { max-width: 520px; justify-self: end; font-size: 17px; color: var(--muted); }
+.section-head .stack { display: flex; flex-direction: column; gap: 12px; }
+
+.band { color: var(--paper); }
+.band--blue { background: var(--blue); }
+.band--ink { background: var(--ink); }
+.band--lime { background: var(--lime); color: var(--ink); }
+.band--paper2 { background: var(--paper-2); }
+
+.rule-top { border-top: 1px solid var(--rule); }
+.rule-bottom { border-bottom: 1px solid var(--rule); }
+
+/* ---- responsivo ---- */
+@media (max-width: 1100px) {
+  :root { --gutter: 40px; }
+}
+@media (max-width: 800px) {
+  :root { --gutter: 20px; }
+  .section { padding: 56px 0; }
+  .section-head { grid-template-columns: 1fr; gap: 16px; margin-bottom: 28px; }
+  .section-head > p { justify-self: start; }
+  .lead { font-size: 17px; }
+}

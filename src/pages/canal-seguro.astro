@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Envie informações com segurança · IDFT" description="Servidores, pesquisadores e cidadãos podem enviar documentos, planilhas e relatórios sem se identificar. O sigilo da fonte é compromisso do IDFT.">
+  <section class="section">
+    <div class="container pagina">
+      <span class="eyebrow">Canal seguro de informações</span>
+      <h1 class="display-xl">Envie informações com segurança</h1>
+      <p class="lead">Servidores, pesquisadores e cidadãos podem enviar documentos, planilhas e relatórios sem se identificar. O sigilo da fonte é compromisso do IDFT.</p>
+      <div class="corpo">
+        <h2 id="como-funciona">Como funciona</h2>
+        <p>O canal está em implantação. Até a sua ativação, informações podem ser enviadas para <a href="mailto:idft.br@proton.me">idft.br@proton.me</a>, preferencialmente a partir de um endereço criado só para esse fim. A chave pública PGP do IDFT será publicada nesta página.</p>
+        <h2>O que ajuda a apurar</h2>
+        <ul><li>documentos originais (contratos, notas, empenhos, atas), ainda que parciais;</li><li>datas, órgãos e pessoas envolvidas, mesmo sem certeza sobre todos os detalhes;</li><li>o caminho pelo qual você teve acesso ao material, quando for seguro dizer.</li></ul>
+        <p class="nota">Não envie informações a partir de computadores ou redes do órgão a que se referem. Remova metadados de fotos e documentos quando possível.</p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .pagina { max-width: 860px; display: flex; flex-direction: column; gap: 20px; }
+  .corpo { display: flex; flex-direction: column; gap: 20px; margin-top: 16px; }
+  .corpo :global(h2) { font-size: 28px; margin-top: 24px; padding-bottom: 10px; border-bottom: 2px solid var(--ink); }
+  .corpo :global(p), .corpo :global(li) { font-size: 17px; line-height: 1.6; color: var(--ink-2); }
+  .corpo :global(.item) { display: flex; flex-direction: column; gap: 8px; padding: 22px 0; border-bottom: 1px solid var(--rule); }
+  .corpo :global(.item h3) { font-size: 24px; }
+  .corpo :global(.nota) { background: var(--paper-2); border-left: 4px solid var(--lime); padding: 14px 18px; border-radius: 6px; }
+</style>

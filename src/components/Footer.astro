@@ -1,0 +1,60 @@
+---
+const year = new Date().getFullYear();
+---
+<footer class="footer band band--ink">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <div class="footer__logo">
+          <img src="/img/idft-symbol.png" alt="" width="40" height="40" />
+          <span>IDFT</span>
+        </div>
+        <p>Instituto pelo Desenvolvimento Fiscal e Transparência. Organização da sociedade civil, apartidária, sediada em Belém, Pará.</p>
+      </div>
+      <div class="footer__col">
+        <span class="footer__head">Projeto Diagonal</span>
+        <a href="/temas">Os 12 temas</a>
+        <a href="/iniciativas">Iniciativas</a>
+        <a href="/dados">Dados</a>
+        <a href="/videos">Vídeos</a>
+      </div>
+      <div class="footer__col">
+        <span class="footer__head">Instituto</span>
+        <a href="/sobre">Sobre</a>
+        <a href="/sobre#equipe">Equipe e conselho</a>
+        <a href="/sobre#transparencia">Transparência do IDFT</a>
+        <a href="/apoie">Apoie</a>
+      </div>
+      <div class="footer__col">
+        <span class="footer__head">Contato</span>
+        <a href="mailto:idft.br@proton.me">idft.br@proton.me</a>
+        <a href="/canal-seguro">Envie informações com segurança</a>
+        <a href="/sobre#imprensa">Imprensa</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© {year} IDFT · Conteúdo sob licença CC BY 4.0, salvo indicação</span>
+      <span><a href="/privacidade">Política de privacidade</a> · <a href="/acessibilidade">Acessibilidade</a></span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer { padding: 56px 0 40px; color: var(--muted-2); }
+  .footer a { color: var(--paper); }
+  .footer a:hover { color: var(--lime); }
+  .footer__grid { display: grid; grid-template-columns: 1.4fr repeat(3, minmax(0, 1fr)); gap: 40px; }
+  .footer__brand { display: flex; flex-direction: column; gap: 14px; }
+  .footer__brand p { font-size: 14px; line-height: 1.55; max-width: 360px; }
+  .footer__logo { display: flex; align-items: center; gap: 12px; font-family: var(--font-display); font-weight: 800; font-size: 28px; color: var(--paper); }
+  .footer__logo img { width: 40px; height: 40px; border-radius: 6px; }
+  .footer__col { display: flex; flex-direction: column; gap: 10px; font-size: 14px; }
+  .footer__head { color: var(--lime); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; }
+  .footer__bottom { display: flex; justify-content: space-between; align-items: center; gap: 16px; border-top: 1px solid #33364A; margin-top: 40px; padding-top: 20px; font-size: 12px; letter-spacing: 0.04em; }
+  .footer__bottom a { color: var(--muted-2); }
+  @media (max-width: 800px) {
+    .footer__grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+    .footer__brand { grid-column: 1 / -1; }
+    .footer__bottom { flex-direction: column; align-items: flex-start; }
+  }
+</style>

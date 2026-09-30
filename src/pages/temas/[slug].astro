@@ -1,0 +1,121 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Arrow from '../../components/Arrow.astro';
+import CanalSeguro from '../../components/CanalSeguro.astro';
+
+export async function getStaticPaths() {
+  const temas = await getCollection('temas');
+  return temas.map((t) => ({ params: { slug: t.id }, props: { tema: t } }));
+}
+const { tema } = Astro.props;
+const { Content } = await render(tema);
+const todos = (await getCollection('temas')).sort((a, b) => a.data.order - b.data.order);
+const outros = todos.filter((t) => t.id !== tema.id);
+const pubs = (await getCollection('publicacoes', ({ data }) => !data.draft && data.tema === tema.id))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const fmt = (d: Date) => d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' });
+---
+<Base title={`${tema.data.title} — Tema ${tema.data.n} · IDFT`} description={tema.data.line} image={tema.data.ampla}>
+  <section class="band band--blue head">
+    <div class="container head__grid">
+      <div class="head__text">
+        <div class="head__meta">
+          <img src={tema.data.compacta} alt="" width="320" height="320" />
+          <span class="eyebrow eyebrow--lime">Tema {tema.data.n} · 12 · Projeto Diagonal</span>
+        </div>
+        <h1 class="display-xl">{tema.data.title}</h1>
+        <p>{tema.data.line}</p>
+        <div class="head__pills">
+          <span>{pubs.length} publicação{pubs.length === 1 ? '' : 'ões'}</span>
+          <span>Peças jurídicas: em preparação</span>
+          <span>Bases de dados: em preparação</span>
+        </div>
+      </div>
+      <div class="head__art"><img src={tema.data.ampla} alt={tema.data.alt} width="1200" height="800" /></div>
+    </div>
+  </section>
+
+  <nav class="chips rule-bottom" aria-label="Outros temas">
+    <div class="container chips__row">
+      <span class="eyebrow eyebrow--muted">Outros temas</span>
+      {outros.map((t) => (
+        <a href={`/temas/${t.id}`} class="chip"><img src={t.data.compacta} alt="" width="320" height="320" loading="lazy" />{t.data.short}</a>
+      ))}
+    </div>
+  </nav>
+
+  <section class="section corpo">
+    <div class="container corpo__grid">
+      <article class="prose">
+        <Content />
+        <h2 id="publicacoes">Publicações do tema</h2>
+        {pubs.length === 0 ? (
+          <p class="muted">As publicações deste tema estão em revisão e serão disponibilizadas em breve.</p>
+        ) : (
+          <ul class="pubs">
+            {pubs.map((p) => (
+              <li>
+                <a href={`/publicacoes/${p.id}`}>
+                  <span class="eyebrow">{p.data.kind} · {fmt(p.data.date)}</span>
+                  <span class="pubs__title">{p.data.title}</span>
+                  <span class="muted">{p.data.summary}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </article>
+      <aside class="lateral">
+        <div class="box">
+          <span class="box__title">Números do tema</span>
+          <p class="muted">Os indicadores deste tema entram aqui quando o painel de dados for publicado.</p>
+          <a href="/dados" class="link-arrow">Ver a seção de dados <Arrow /></a>
+        </div>
+        <div class="box box--ink" id="linha-do-tempo">
+          <span class="box__title">Linha do tempo</span>
+          <p>Do primeiro pedido de acesso à informação à última decisão: cada passo datado, com o documento anexado. Em preparação.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <CanalSeguro />
+</Base>
+
+<style>
+  .head { padding: 56px 0 0; overflow: hidden; }
+  .head__grid { display: grid; grid-template-columns: 1fr 600px; gap: 48px; align-items: center; }
+  .head__text { display: flex; flex-direction: column; gap: 20px; padding-bottom: 56px; }
+  .head__meta { display: flex; align-items: center; gap: 14px; }
+  .head__meta img { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; box-shadow: 3px 3px 0 var(--ink); }
+  .head h1 { color: var(--paper); text-shadow: 6px 6px 0 var(--ink); }
+  .head p { font-size: 19px; line-height: 1.5; max-width: 560px; }
+  .head__pills { display: flex; flex-wrap: wrap; gap: 12px; }
+  .head__pills span { background: var(--ink); color: var(--lime); padding: 8px 14px; border-radius: 4px; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+  .head__art img { width: 100%; border-radius: 10px 10px 0 0; border: 2px solid var(--ink); border-bottom: 0; }
+  .chips { padding: 18px 0; overflow-x: auto; }
+  .chips__row { display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+  .chip { display: inline-flex; align-items: center; gap: 8px; border: 1.5px solid var(--ink); border-radius: 999px; padding: 6px 12px 6px 6px; font-size: 13px; font-weight: 600; min-height: 40px; color: var(--ink); }
+  .chip img { width: 26px; height: 26px; object-fit: cover; }
+  .chip:hover { background: var(--ink); color: var(--paper); }
+  .corpo__grid { display: grid; grid-template-columns: 1fr 380px; gap: 64px; }
+  .prose :global(p) { font-size: 17px; line-height: 1.6; margin-bottom: 18px; }
+  .prose :global(h2) { font-size: 30px; margin: 40px 0 16px; padding-bottom: 12px; border-bottom: 2px solid var(--ink); }
+  .pubs { list-style: none; margin: 0; padding: 0; }
+  .pubs li a { display: flex; flex-direction: column; gap: 6px; padding: 20px 8px; border-bottom: 1px solid var(--rule); color: var(--ink); }
+  .pubs li a:hover { background: var(--paper-2); }
+  .pubs__title { font-size: 22px; font-weight: 700; line-height: 1.2; }
+  .lateral { display: flex; flex-direction: column; gap: 28px; }
+  .box { border: 2px solid var(--ink); border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 12px; box-shadow: 6px 6px 0 var(--blue); }
+  .box--ink { background: var(--ink); color: var(--paper); box-shadow: none; }
+  .box--ink p { color: var(--muted-2); }
+  .box__title { font-family: var(--font-display); font-weight: 800; font-size: 22px; }
+  .box--ink .box__title { color: var(--lime); }
+  @media (max-width: 1000px) {
+    .head__grid { grid-template-columns: 1fr; gap: 24px; }
+    .head__text { padding-bottom: 8px; }
+    .head h1 { text-shadow: 4px 4px 0 var(--ink); }
+    .corpo__grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+</style>
