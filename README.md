@@ -20,6 +20,11 @@ npm run build    # gera a pasta dist/
 
 ## Publicação
 
-Cloudflare Pages conectada a este repositório: comando de build `npm run build`, pasta de saída `dist`. Cada push na branch `main` publica em idft.com.br; outras branches ganham endereços de pré-visualização.
+Projeto **idft-site** na Cloudflare Pages (conta idft.br@proton.me), conectado a este repositório (`idft-br/Idft-site`):
+
+- endereço provisório: https://idft-site.pages.dev (o domínio idft.com.br é ligado em *Custom domains*);
+- build: `npm run build`, saída `dist`, Node 22 (`.node-version`), sem variáveis de ambiente;
+- cada push na branch `main` publica em ~1 minuto; outras branches ganham endereços de pré-visualização (`<branch>.idft-site.pages.dev`);
+- cabeçalhos de segurança (CSP, HSTS, etc.) e cache ficam em `public/_headers`.
 
 Arquivos grandes (PDFs, bases) não entram no repositório: vão para o bucket R2 (`arquivos.idft.com.br`) e são referenciados por link.
