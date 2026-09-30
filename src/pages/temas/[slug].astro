@@ -3,36 +3,43 @@ import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Arrow from '../../components/Arrow.astro';
 import CanalSeguro from '../../components/CanalSeguro.astro';
+import VideoPlaceholder from '../../components/VideoPlaceholder.astro';
 
 export async function getStaticPaths() {
   const temas = await getCollection('temas');
   return temas.map((t) => ({ params: { slug: t.id }, props: { tema: t } }));
 }
 const { tema } = Astro.props;
+const d = tema.data;
 const { Content } = await render(tema);
 const todos = (await getCollection('temas')).sort((a, b) => a.data.order - b.data.order);
 const outros = todos.filter((t) => t.id !== tema.id);
 const pubs = (await getCollection('publicacoes', ({ data }) => !data.draft && data.tema === tema.id))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const fmt = (d: Date) => d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' });
+const fmt = (dt: Date) => dt.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' });
+const temConteudo = Boolean(d.resumo || d.numeros?.length || d.destaques?.length);
+const ordem = todos.findIndex((t) => t.id === tema.id);
+const anterior = todos[(ordem + todos.length - 1) % todos.length];
+const proximo = todos[(ordem + 1) % todos.length];
 ---
-<Base title={`${tema.data.title} — Tema ${tema.data.n} · IDFT`} description={tema.data.line} image={tema.data.ampla}>
+<Base title={`${d.title} — Tema ${d.n} · IDFT`} description={d.resumo ?? d.line} image={d.ampla}>
+  <!-- abertura -->
   <section class="band band--blue head">
     <div class="container head__grid">
       <div class="head__text">
         <div class="head__meta">
-          <img src={tema.data.compacta} alt="" width="320" height="320" />
-          <span class="eyebrow eyebrow--lime">Tema {tema.data.n} · 12 · Projeto Diagonal</span>
+          <img src={d.compacta} alt="" width="320" height="320" />
+          <span class="eyebrow eyebrow--lime">Tema {d.n} · 12 · Projeto Diagonal</span>
         </div>
-        <h1 class="display-xl">{tema.data.title}</h1>
-        <p>{tema.data.line}</p>
+        <h1 class="display-xl">{d.title}</h1>
+        <p>{d.line}</p>
         <div class="head__pills">
-          <span>{pubs.length} publicação{pubs.length === 1 ? '' : 'ões'}</span>
-          <span>Peças jurídicas: em preparação</span>
-          <span>Bases de dados: em preparação</span>
+          {d.atualizado && <span>Atualizado em {d.atualizado}</span>}
+          <span>{pubs.length} {pubs.length === 1 ? 'publicação' : 'publicações'}</span>
+          {d.fontes?.length ? <span>{d.fontes.length} documentos citados</span> : <span>Documentos: em preparação</span>}
         </div>
       </div>
-      <div class="head__art"><img src={tema.data.ampla} alt={tema.data.alt} width="1200" height="800" /></div>
+      <div class="head__art"><img src={d.ampla} alt={d.alt} width="1200" height="800" /></div>
     </div>
   </section>
 
@@ -45,38 +52,159 @@ const fmt = (d: Date) => d.toLocaleDateString('pt-BR', { day: '2-digit', month: 
     </div>
   </nav>
 
+  {temConteudo && (
+    <!-- em síntese + números -->
+    <section class="section sintese">
+      <div class="container">
+        <div class="sintese__grid">
+          <div class="sintese__text">
+            <span class="eyebrow">Em síntese</span>
+            {d.resumo && <p class="sintese__lead">{d.resumo}</p>}
+          </div>
+          {d.numeros?.length && (
+            <ul class="numeros" aria-label="Números do tema">
+              {d.numeros.map((x) => (
+                <li>
+                  <span class="numeros__n">{x.n}</span>
+                  <span class="numeros__l">{x.l}</span>
+                  {x.fonte && <span class="ref">{x.fonte}</span>}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {d.destaques?.length && (
+    <!-- o que mais chama a atenção -->
+    <section class="band band--ink destaques">
+      <div class="container">
+        <div class="section-head section-head--ink">
+          <div class="stack">
+            <span class="eyebrow eyebrow--lime">Pontos de atenção</span>
+            <h2 class="display-m">O que mais chama a atenção</h2>
+          </div>
+          <p>Os fatos que, sozinhos, dão a medida do tema. Cada um remete ao documento que o comprova.</p>
+        </div>
+        <ol class="destaques__grid">
+          {d.destaques.map((x, i) => (
+            <li class="destaque">
+              <span class="destaque__n">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{x.titulo}</h3>
+              <p>{x.texto}</p>
+              {x.fonte && <span class="ref ref--lime">{x.fonte}</span>}
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  )}
+
+  <!-- os fatos + lateral -->
   <section class="section corpo">
     <div class="container corpo__grid">
       <article class="prose">
         <Content />
-        <h2 id="publicacoes">Publicações do tema</h2>
-        {pubs.length === 0 ? (
-          <p class="muted">As publicações deste tema estão em revisão e serão disponibilizadas em breve.</p>
-        ) : (
-          <ul class="pubs">
-            {pubs.map((p) => (
-              <li>
-                <a href={`/publicacoes/${p.id}`}>
-                  <span class="eyebrow">{p.data.kind} · {fmt(p.data.date)}</span>
-                  <span class="pubs__title">{p.data.title}</span>
-                  <span class="muted">{p.data.summary}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        )}
       </article>
       <aside class="lateral">
-        <div class="box">
-          <span class="box__title">Números do tema</span>
-          <p class="muted">Os indicadores deste tema entram aqui quando o painel de dados for publicado.</p>
-          <a href="/dados" class="link-arrow">Ver a seção de dados <Arrow /></a>
-        </div>
-        <div class="box box--ink" id="linha-do-tempo">
-          <span class="box__title">Linha do tempo</span>
-          <p>Do primeiro pedido de acesso à informação à última decisão: cada passo datado, com o documento anexado. Em preparação.</p>
+        {d.figuras?.map((f) => (
+          <figure class="figura">
+            <span class="eyebrow">Documento</span>
+            <img src={f.src} alt={f.alt} loading="lazy" />
+            <figcaption>{f.legenda} {f.fonte && <span class="ref">{f.fonte}</span>}</figcaption>
+          </figure>
+        ))}
+        {d.video && (
+          <div class="box box--video">
+            <span class="eyebrow">Vídeo</span>
+            <VideoPlaceholder youtubeId={d.video.youtubeId} title={d.video.titulo} simples />
+            <p class="muted">{d.video.titulo}{d.video.nota ? ` — ${d.video.nota}` : ''}</p>
+          </div>
+        )}
+        {!d.figuras?.length && !d.video && (
+          <div class="box">
+            <span class="box__title">Documentos do tema</span>
+            <p class="muted">Os documentos, imagens e vídeos deste tema entram aqui à medida que forem revisados.</p>
+          </div>
+        )}
+        <div class="box box--ink">
+          <span class="box__title">Envie informações</span>
+          <p>Documentos, contratos, fotos: o IDFT recebe informações com sigilo da fonte.</p>
+          <a href="/canal-seguro" class="link-arrow link-arrow--paper">Como enviar com segurança <Arrow color="#D3E33A" /></a>
         </div>
       </aside>
+    </div>
+  </section>
+
+  {d.linha_do_tempo?.length && (
+    <section class="section section--tight linha rule-top">
+      <div class="container">
+        <div class="section-head">
+          <div class="stack">
+            <span class="eyebrow">Linha do tempo</span>
+            <h2 class="display-m">Passo a passo, com data</h2>
+          </div>
+          <p>Cada marco remete ao documento correspondente na lista de fontes.</p>
+        </div>
+        <ol class="tl">
+          {d.linha_do_tempo.map((x) => (
+            <li class="tl__item">
+              <span class="tl__data">{x.data}</span>
+              <span class="tl__fato">{x.fato} {x.fonte && <span class="ref">{x.fonte}</span>}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  )}
+
+  <section class="section section--tight fontes rule-top">
+    <div class="container fontes__grid">
+      <div>
+        <span class="eyebrow">Fontes e documentos</span>
+        <h2 class="display-s">Nada é afirmado sem base</h2>
+        <p class="muted">As referências <span class="ref">doc. NN</span> no texto correspondem aos documentos abaixo. Os arquivos serão disponibilizados para download à medida que forem preparados para publicação.</p>
+      </div>
+      {d.fontes?.length ? (
+        <ul class="fontes__lista">
+          {d.fontes.map((f) => (
+            <li>
+              <span class="ref">{f.id}</span>
+              <span>{f.desc}</span>
+              {f.url ? <a href={f.url} class="link-arrow">Abrir <Arrow /></a> : <span class="fontes__breve">em breve</span>}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="muted">A lista de documentos deste tema está em preparação.</p>
+      )}
+    </div>
+  </section>
+
+  <section class="section section--tight pubs-sec rule-top">
+    <div class="container">
+      <h2 id="publicacoes" class="display-s">Publicações do tema</h2>
+      {pubs.length === 0 ? (
+        <p class="muted">As publicações deste tema estão em revisão e serão disponibilizadas em breve.</p>
+      ) : (
+        <ul class="pubs">
+          {pubs.map((p) => (
+            <li>
+              <a href={`/publicacoes/${p.id}`}>
+                <span class="eyebrow">{p.data.kind} · {fmt(p.data.date)}</span>
+                <span class="pubs__title">{p.data.title}</span>
+                <span class="muted">{p.data.summary}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+      <div class="prox">
+        <a href={`/temas/${anterior.id}`} class="prox__link"><span class="eyebrow eyebrow--muted">← Tema {anterior.data.n}</span><span>{anterior.data.title}</span></a>
+        <a href={`/temas/${proximo.id}`} class="prox__link prox__link--dir"><span class="eyebrow eyebrow--muted">Tema {proximo.data.n} →</span><span>{proximo.data.title}</span></a>
+      </div>
     </div>
   </section>
 
@@ -84,6 +212,7 @@ const fmt = (d: Date) => d.toLocaleDateString('pt-BR', { day: '2-digit', month: 
 </Base>
 
 <style>
+  /* abertura */
   .head { padding: 56px 0 0; overflow: hidden; }
   .head__grid { display: grid; grid-template-columns: 1fr 600px; gap: 48px; align-items: center; }
   .head__text { display: flex; flex-direction: column; gap: 20px; padding-bottom: 56px; }
@@ -94,28 +223,96 @@ const fmt = (d: Date) => d.toLocaleDateString('pt-BR', { day: '2-digit', month: 
   .head__pills { display: flex; flex-wrap: wrap; gap: 12px; }
   .head__pills span { background: var(--ink); color: var(--lime); padding: 8px 14px; border-radius: 4px; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
   .head__art img { width: 100%; border-radius: 10px 10px 0 0; border: 2px solid var(--ink); border-bottom: 0; }
+
   .chips { padding: 18px 0; overflow-x: auto; }
   .chips__row { display: flex; align-items: center; gap: 10px; white-space: nowrap; }
-  .chip { display: inline-flex; align-items: center; gap: 8px; border: 1.5px solid var(--ink); border-radius: 999px; padding: 6px 12px 6px 6px; font-size: 13px; font-weight: 600; min-height: 40px; color: var(--ink); }
+  .chip { flex-shrink: 0; display: inline-flex; align-items: center; gap: 8px; border: 1.5px solid var(--ink); border-radius: 999px; padding: 6px 12px 6px 6px; font-size: 13px; font-weight: 600; min-height: 40px; color: var(--ink); }
   .chip img { width: 26px; height: 26px; object-fit: cover; }
   .chip:hover { background: var(--ink); color: var(--paper); }
-  .corpo__grid { display: grid; grid-template-columns: 1fr 380px; gap: 64px; }
+
+  /* referência a documento */
+  .ref, .prose :global(.ref) { display: inline-block; align-self: flex-start; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--blue); border: 1px solid currentColor; border-radius: 4px; padding: 1px 6px; vertical-align: middle; white-space: nowrap; }
+  .ref--lime { color: var(--lime); }
+
+  /* em síntese */
+  .sintese { padding-bottom: 64px; }
+  .sintese__grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 64px; align-items: start; }
+  .sintese__text { display: flex; flex-direction: column; gap: 16px; }
+  .sintese__lead { font-family: var(--font-display); font-weight: 500; font-size: clamp(22px, 2vw, 27px); line-height: 1.35; letter-spacing: -0.01em; }
+  .numeros { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--ink); border: 2px solid var(--ink); border-radius: 10px; overflow: hidden; box-shadow: 8px 8px 0 var(--lime); }
+  .numeros li { background: var(--paper-3); padding: 20px 18px; display: flex; flex-direction: column; gap: 6px; }
+  .numeros__n { font-family: var(--font-display); font-weight: 800; font-size: 34px; line-height: 1; letter-spacing: -0.02em; color: var(--blue); }
+  .numeros__l { font-size: 13.5px; line-height: 1.4; color: var(--muted); }
+
+  /* destaques */
+  .destaques { padding: 80px 0; }
+  .section-head--ink p { color: var(--muted-2); }
+  .destaques__grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .destaque { border: 1.5px solid rgba(243,239,229,0.28); border-radius: 10px; padding: 26px 24px 24px; display: flex; flex-direction: column; gap: 12px; background: rgba(243,239,229,0.03); }
+  .destaque__n { font-family: var(--font-display); font-weight: 800; font-size: 14px; letter-spacing: 0.1em; color: var(--lime); }
+  .destaque h3 { font-size: 24px; line-height: 1.08; color: var(--paper); }
+  .destaque p { font-size: 15px; line-height: 1.55; color: var(--muted-2); flex-grow: 1; }
+
+  /* corpo */
+  .corpo__grid { display: grid; grid-template-columns: 1fr 380px; gap: 64px; align-items: start; }
   .prose :global(p) { font-size: 17px; line-height: 1.6; margin-bottom: 18px; }
-  .prose :global(h2) { font-size: 30px; margin: 40px 0 16px; padding-bottom: 12px; border-bottom: 2px solid var(--ink); }
-  .pubs { list-style: none; margin: 0; padding: 0; }
-  .pubs li a { display: flex; flex-direction: column; gap: 6px; padding: 20px 8px; border-bottom: 1px solid var(--rule); color: var(--ink); }
-  .pubs li a:hover { background: var(--paper-2); }
-  .pubs__title { font-size: 22px; font-weight: 700; line-height: 1.2; }
-  .lateral { display: flex; flex-direction: column; gap: 28px; }
+  .prose :global(h2) { font-size: 30px; margin: 0 0 20px; padding-bottom: 12px; border-bottom: 2px solid var(--ink); }
+  .prose :global(h2 + h2), .prose :global(p + h2), .prose :global(ul + h2) { margin-top: 48px; }
+  .prose :global(h3) { font-size: 21px; margin: 32px 0 12px; color: var(--blue); }
+  .prose :global(ul) { padding-left: 0; margin: 0 0 18px; list-style: none; }
+  .prose :global(li) { position: relative; padding-left: 24px; font-size: 17px; line-height: 1.55; margin-bottom: 12px; }
+  .prose :global(li::before) { content: ""; position: absolute; left: 0; top: 11px; width: 12px; height: 4px; background: var(--coral); }
+  .prose :global(b), .prose :global(strong) { font-weight: 700; }
+  .lateral { display: flex; flex-direction: column; gap: 28px; position: sticky; top: 104px; }
+  .figura { margin: 0; border: 2px solid var(--ink); border-radius: 10px; padding: 18px; background: #fff; display: flex; flex-direction: column; gap: 12px; box-shadow: 6px 6px 0 var(--blue); }
+  .figura img { width: 100%; height: auto; border: 1px solid var(--rule); }
+  .figura figcaption { font-size: 13.5px; line-height: 1.45; color: var(--muted); }
   .box { border: 2px solid var(--ink); border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 12px; box-shadow: 6px 6px 0 var(--blue); }
+  .box--video { padding: 18px; }
+  .box--video p { font-size: 13.5px; line-height: 1.45; }
   .box--ink { background: var(--ink); color: var(--paper); box-shadow: none; }
   .box--ink p { color: var(--muted-2); }
   .box__title { font-family: var(--font-display); font-weight: 800; font-size: 22px; }
   .box--ink .box__title { color: var(--lime); }
+  .link-arrow--paper { color: var(--paper); }
+
+  /* linha do tempo */
+  .tl { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 48px; }
+  .tl__item { display: grid; grid-template-columns: 110px 1fr; gap: 16px; padding: 14px 0; border-top: 1px solid var(--rule); font-size: 15px; line-height: 1.5; }
+  .tl__data { font-family: var(--font-display); font-weight: 800; color: var(--blue); }
+
+  /* fontes */
+  .fontes__grid { display: grid; grid-template-columns: 360px 1fr; gap: 48px; align-items: start; }
+  .fontes__grid h2 { margin: 10px 0 12px; }
+  .fontes__lista { list-style: none; margin: 0; padding: 0; }
+  .fontes__lista li { display: grid; grid-template-columns: 120px 1fr auto; gap: 16px; align-items: center; padding: 12px 0; border-top: 1px solid var(--rule); font-size: 15px; line-height: 1.45; }
+  .fontes__breve { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+
+  /* publicações + navegação */
+  .pubs-sec h2 { margin-bottom: 16px; }
+  .pubs { list-style: none; margin: 0; padding: 0; }
+  .pubs li a { display: flex; flex-direction: column; gap: 6px; padding: 20px 8px; border-bottom: 1px solid var(--rule); color: var(--ink); }
+  .pubs li a:hover { background: var(--paper-2); }
+  .pubs__title { font-size: 22px; font-weight: 700; line-height: 1.2; }
+  .prox { display: flex; justify-content: space-between; gap: 24px; margin-top: 40px; }
+  .prox__link { display: flex; flex-direction: column; gap: 6px; font-family: var(--font-display); font-weight: 700; font-size: 20px; }
+  .prox__link--dir { text-align: right; align-items: flex-end; }
+
   @media (max-width: 1000px) {
     .head__grid { grid-template-columns: 1fr; gap: 24px; }
     .head__text { padding-bottom: 8px; }
     .head h1 { text-shadow: 4px 4px 0 var(--ink); }
-    .corpo__grid { grid-template-columns: 1fr; gap: 40px; }
+    .sintese__grid, .corpo__grid, .fontes__grid { grid-template-columns: 1fr; gap: 32px; }
+    .lateral { position: static; }
+    .destaques { padding: 56px 0; }
+    .destaques__grid { grid-template-columns: 1fr; }
+    .tl { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .numeros { grid-template-columns: 1fr; box-shadow: 6px 6px 0 var(--lime); }
+    .tl__item { grid-template-columns: 1fr; gap: 4px; }
+    .fontes__lista li { grid-template-columns: 1fr; gap: 6px; }
+    .prox { flex-direction: column; }
+    .prox__link--dir { text-align: left; align-items: flex-start; }
   }
 </style>

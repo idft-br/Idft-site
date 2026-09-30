@@ -1,7 +1,7 @@
 ---
 /* Quando houver vídeo, passe youtubeId="XXXXXXXX" e o embed real substitui o cartaz. */
-interface Props { youtubeId?: string; title?: string }
-const { youtubeId, title = 'IDFT — Projeto Diagonal: o Pará em perspectiva' } = Astro.props;
+interface Props { youtubeId?: string; title?: string; simples?: boolean }
+const { youtubeId, title = 'IDFT — Projeto Diagonal: o Pará em perspectiva', simples = false } = Astro.props;
 ---
 {youtubeId ? (
   <div class="video">
@@ -12,6 +12,11 @@ const { youtubeId, title = 'IDFT — Projeto Diagonal: o Pará em perspectiva' }
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       referrerpolicy="strict-origin-when-cross-origin"
       allowfullscreen></iframe>
+  </div>
+) : simples ? (
+  <div class="video video--simples" role="img" aria-label={`Espaço reservado para o vídeo: ${title}`}>
+    <span class="poster__play" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="#F3EFE5"><path d="M7 4.5v15l12-7.5z"/></svg></span>
+    <span class="simples__label">Vídeo · em breve</span>
   </div>
 ) : (
   <div class="video video--poster" role="img" aria-label="Espaço reservado para o vídeo de apresentação do Projeto Diagonal">
@@ -38,6 +43,10 @@ const { youtubeId, title = 'IDFT — Projeto Diagonal: o Pará em perspectiva' }
 <style>
   .video { position: relative; width: 100%; aspect-ratio: 16 / 9; background: var(--ink); border-radius: var(--radius); overflow: hidden; color: var(--paper); }
   .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .video--simples .poster__play { width: 64px; height: 44px; border-radius: 12px; }
+  .video--simples { background: var(--ink) url('/img/passaro-editorial.jpg') center/cover; }
+  .video--simples::before { content: ""; position: absolute; inset: 0; background: rgba(21,23,30,0.72); }
+  .simples__label { position: absolute; left: 14px; bottom: 12px; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--lime); }
   .poster__top { position: absolute; left: 0; right: 0; top: 0; z-index: 2; display: flex; align-items: center; gap: 14px; padding: 20px 28px; font-size: 15px; font-weight: 600; background: linear-gradient(rgba(21,23,30,.85), rgba(21,23,30,0)); }
   .poster__top img { width: 36px; height: 36px; border-radius: 999px; border: 1px solid rgba(243,239,229,.4); }
   .poster__art { position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 4%; padding: 8% 7.5%; }
