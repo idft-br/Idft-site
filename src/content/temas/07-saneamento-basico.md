@@ -2,14 +2,14 @@
 n: "07"
 title: "Saneamento básico"
 short: "Saneamento"
-line: "A tragédia do saneamento aprofundada sem qualquer pudor é o próximo grande escândalo nacional."
+line: "A tragédia do saneamento aprofundada sem qualquer pudor em termos escancarados."
 ampla: "/img/temas/07-saneamento-ampla.jpg"
 compacta: "/img/temas/07-saneamento-compacta.jpg"
 alt: "Saneamento: tubulação e esgoto a céu aberto"
 order: 7
 ---
 
-A tragédia do saneamento aprofundada sem qualquer pudor é o próximo grande escândalo nacional.
+A tragédia do saneamento aprofundada sem qualquer pudor em termos escancarados.
 
 ## O que reunimos neste tema
 

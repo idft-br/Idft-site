@@ -17,12 +17,11 @@ const destaque = temas[0]; // Tema 01 · Visão geral
     <div class="container hero__grid">
       <div class="hero__text">
         <span class="eyebrow">Um futuro melhor só pode ser escrito a muitas mãos</span>
-        <h1 class="display-xl">Compreender quanto o Estado arrecada e como gasta é essencial para um futuro melhor</h1>
+        <h1 class="display-xl hero__title">Compreender quanto o Estado arrecada e como gasta é essencial para um futuro melhor</h1>
         <p class="lead">Sem informação o debate público se perde em afirmações vazias, afastando o estímulo para que os governantes busquem o voto através da melhoria da vida da coletividade.</p>
         <p class="lead">Atuamos na interseção entre o direito, a economia e a política, visando garantir que os recursos <i>públicos</i> sirvam ao interesse <i>público</i>.</p>
         <div class="hero__actions">
           <a href="#diagonal" class="btn btn--blue">Conheça nossa atuação <Arrow color="#D3E33A" size={18} /></a>
-          <a href="/temas" class="btn btn--outline">Ver os 12 temas</a>
         </div>
       </div>
       <div class="hero__art">
@@ -56,7 +55,7 @@ const destaque = temas[0]; // Tema 01 · Visão geral
         <span class="eyebrow">Primeiro foco de atuação / caso mais extremo</span>
         <h2 class="display-l">Projeto <i>Diagonal</i></h2>
         <p><b><i>Um estado em perspectiva</i></b>. O primeiro enfoque do IDFT é a exposição dos aspectos únicos da armadilha local e das ações já adotadas no seu enfrentamento, buscando a construção de caminhos.</p>
-        <p><b><i>Arrecadação recorde, abandono histórico</i></b>: um estado que dobrou o nível real de receitas e de gastos em 8 anos, mas a sobra não se reverte em melhorias coletivas enquanto a atuação segue protegida também pelo vazio do debate público.</p>
+        <p><b><i>Arrecadação recorde, abandono histórico</i></b>: um estado que dobrou o nível real de receitas e mais que dobrou o de gastos, mas a sobra não se reverte em melhorias e as razões seguem protegidas no vazio do debate público.</p>
         <div class="stats">
           <div class="stat"><span class="stat__n">98%</span><span class="stat__l">aumento real da arrecadação (IPCA)</span></div>
           <div class="stat"><span class="stat__n">+150%</span><span class="stat__l">aumento do valor pago às OSS em 3 anos</span></div>
@@ -107,7 +106,7 @@ const destaque = temas[0]; // Tema 01 · Visão geral
       <div class="destaque__text">
         <span class="eyebrow eyebrow--lime">Em destaque · Tema {destaque.data.n} · {destaque.data.title}</span>
         <h2 id="destaque-title" class="display-l">Arrecadação excepcional, duplicação de gastos e a desvalorização do voto</h2>
-        <p>Quando o dinheiro a mais vira problema: o controle sobre o controle, a opacidade e a prevalência de quem não tem voto em substituição à competição política — danos profundos à ideia de democracia e de justiça, e a degradação das condições materiais em uma velocidade inimaginável.</p>
+        <p>O paradoxo de bonança: o estado de maior incremento de arrecadação em todo o país mais que dobra os gastos, mas segue com a pior saúde e educação do Brasil — os efeitos materiais sobre o povo da política de controle sobre os controles.</p>
         <div class="destaque__actions">
           <a href={`/temas/${destaque.id}`} class="btn btn--lime">Abrir o tema <Arrow /></a>
           <a href={`/temas/${destaque.id}#linha-do-tempo`} class="destaque__link">Ver a linha do tempo</a>
@@ -179,6 +178,7 @@ const destaque = temas[0]; // Tema 01 · Visão geral
   /* herói */
   .hero { padding: 64px 0 40px; }
   .hero__grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 40px; align-items: center; }
+  .hero__title { font-size: clamp(38px, 4.2vw, 60px); }
   .hero__text { display: flex; flex-direction: column; gap: 24px; }
   .hero__text .lead { max-width: 600px; }
   .hero__actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 6px; }
