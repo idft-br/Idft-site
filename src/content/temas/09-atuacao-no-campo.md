@@ -46,8 +46,9 @@ figuras:
     fonte: "doc. 35.3, p. 14"
 
 video:
+  youtubeId: "ScsEo8-7FhI"
   titulo: "Documentário gravado no local, com os moradores do entorno da Fazenda Lago Vermelho"
-  nota: "Trecho a ser inserido: permite comparar o relato dos moradores com a descrição feita deles na ação de reintegração de posse."
+  nota: "Compare o relato dos moradores com a descrição feita deles na ação de reintegração de posse."
 
 linha_do_tempo:
   - { data: "2004", fato: "Desmatamento de 2.053 ha na Fazenda JD e LA; multa de R$ 3.079.500,00.", fonte: "MPF" }
