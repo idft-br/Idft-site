@@ -18,6 +18,7 @@ const pubs = (await getCollection('publicacoes', ({ data }) => !data.draft && da
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const fmt = (dt: Date) => dt.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' });
 const temConteudo = Boolean(d.resumo || d.numeros?.length || d.destaques?.length);
+const videos = d.video ? (Array.isArray(d.video) ? d.video : [d.video]) : [];
 const ordem = todos.findIndex((t) => t.id === tema.id);
 const anterior = todos[(ordem + todos.length - 1) % todos.length];
 const proximo = todos[(ordem + 1) % todos.length];
@@ -116,14 +117,14 @@ const proximo = todos[(ordem + 1) % todos.length];
             <figcaption>{f.legenda} {f.fonte && <span class="ref">{f.fonte}</span>}</figcaption>
           </figure>
         ))}
-        {d.video && (
+        {videos.map((v) => (
           <div class="box box--video">
             <span class="eyebrow">Vídeo</span>
-            <VideoPlaceholder youtubeId={d.video.youtubeId} title={d.video.titulo} simples />
-            <p class="muted">{d.video.titulo}{d.video.nota ? ` — ${d.video.nota}` : ''}</p>
+            <VideoPlaceholder youtubeId={v.youtubeId} title={v.titulo} simples />
+            <p class="muted">{v.titulo}{v.nota ? ` — ${v.nota}` : ''}{v.link && <> <a href={v.link} rel="noopener" target="_blank" class="box__link">Abrir no YouTube ↗</a></>}</p>
           </div>
-        )}
-        {!d.figuras?.length && !d.video && (
+        ))}
+        {!d.figuras?.length && !videos.length && (
           <div class="box">
             <span class="box__title">Documentos do tema</span>
             <p class="muted">Os documentos, imagens e vídeos deste tema entram aqui à medida que forem revisados.</p>
@@ -165,7 +166,7 @@ const proximo = todos[(ordem + 1) % todos.length];
       <div>
         <span class="eyebrow">Fontes e documentos</span>
         <h2 class="display-s">Nada é afirmado sem base</h2>
-        <p class="muted">As referências <span class="ref">doc. NN</span> no texto correspondem aos documentos abaixo. Os arquivos serão disponibilizados para download à medida que forem preparados para publicação.</p>
+        <p class="muted">Cada afirmação do texto traz, em etiqueta, a fonte que a sustenta. A lista abaixo reúne esses documentos; os arquivos serão disponibilizados para download à medida que forem preparados para publicação.</p>
       </div>
       {d.fontes?.length ? (
         <ul class="fontes__lista">
@@ -231,7 +232,9 @@ const proximo = todos[(ordem + 1) % todos.length];
   .chip:hover { background: var(--ink); color: var(--paper); }
 
   /* referência a documento */
-  .ref, .prose :global(.ref) { display: inline-block; align-self: flex-start; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--blue); border: 1px solid currentColor; border-radius: 4px; padding: 1px 6px; vertical-align: middle; white-space: nowrap; }
+  .ref, .prose :global(.ref) { display: inline; font-size: 12px; font-weight: 700; letter-spacing: 0.01em; color: var(--blue); border: 1px solid currentColor; border-radius: 4px; padding: 1px 6px; vertical-align: baseline; line-height: 1.9; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  .numeros .ref, .destaque .ref, .figura .ref, .fontes .ref { display: inline-block; align-self: flex-start; line-height: 1.4; }
+  .box__link { color: var(--blue); font-weight: 700; white-space: nowrap; }
   .ref--lime { color: var(--lime); }
 
   /* em síntese */
@@ -285,7 +288,7 @@ const proximo = todos[(ordem + 1) % todos.length];
   .fontes__grid { display: grid; grid-template-columns: 360px 1fr; gap: 48px; align-items: start; }
   .fontes__grid h2 { margin: 10px 0 12px; }
   .fontes__lista { list-style: none; margin: 0; padding: 0; }
-  .fontes__lista li { display: grid; grid-template-columns: 120px 1fr auto; gap: 16px; align-items: center; padding: 12px 0; border-top: 1px solid var(--rule); font-size: 15px; line-height: 1.45; }
+  .fontes__lista li { display: grid; grid-template-columns: 180px 1fr auto; gap: 16px; align-items: center; padding: 12px 0; border-top: 1px solid var(--rule); font-size: 15px; line-height: 1.45; }
   .fontes__breve { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
 
   /* publicações + navegação */

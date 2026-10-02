@@ -1,6 +1,8 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
+const videoSchema = z.object({ youtubeId: z.string().optional(), titulo: z.string(), nota: z.string().optional(), link: z.string().optional() });
+
 // Cada tema = um arquivo Markdown em src/content/temas/NN-slug.md
 // Os campos abaixo de `order` são opcionais: quando preenchidos, a página do tema ganha
 // as seções correspondentes (síntese, números, destaques, linha do tempo, figuras, vídeo, fontes).
@@ -27,7 +29,7 @@ const temas = defineCollection({
     figuras: z.array(z.object({                          // documentos/imagens com legenda
       src: z.string(), alt: z.string(), legenda: z.string(), fonte: z.string().optional(),
     })).optional(),
-    video: z.object({ youtubeId: z.string().optional(), titulo: z.string(), nota: z.string().optional() }).optional(),
+    video: z.union([videoSchema, z.array(videoSchema)]).optional(),   // um vídeo ou uma lista
     linha_do_tempo: z.array(z.object({
       data: z.string(), fato: z.string(), fonte: z.string().optional(),
     })).optional(),
