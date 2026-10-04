@@ -266,6 +266,15 @@ const proximo = todos[(ordem + 1) % todos.length];
   .prose :global(li) { position: relative; padding-left: 24px; font-size: 17px; line-height: 1.55; margin-bottom: 12px; }
   .prose :global(li::before) { content: ""; position: absolute; left: 0; top: 11px; width: 12px; height: 4px; background: var(--coral); }
   .prose :global(b), .prose :global(strong) { font-weight: 700; }
+  /* figura e tabela dentro do texto (imagens largas, comparações curtas) */
+  .prose :global(figure) { margin: 28px 0; border: 2px solid var(--ink); border-radius: 10px; padding: 16px; background: #fff; box-shadow: 6px 6px 0 var(--blue); }
+  .prose :global(figure a) { display: block; }
+  .prose :global(figure img) { width: auto; max-width: 100%; height: auto; margin: 0 auto; }
+  .prose :global(figcaption) { margin-top: 12px; font-size: 13.5px; line-height: 1.5; color: var(--muted); }
+  .prose :global(table) { width: 100%; border-collapse: collapse; margin: 24px 0 28px; font-size: 15.5px; line-height: 1.45; }
+  .prose :global(th) { text-align: left; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 0 12px 8px 0; border-bottom: 2px solid var(--ink); vertical-align: bottom; }
+  .prose :global(td) { padding: 12px 12px 12px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  .prose :global(td:first-child) { font-family: var(--font-display); font-weight: 800; color: var(--blue); white-space: nowrap; }
   .lateral { display: flex; flex-direction: column; gap: 28px; position: sticky; top: 104px; }
   .figura { margin: 0; border: 2px solid var(--ink); border-radius: 10px; padding: 18px; background: #fff; display: flex; flex-direction: column; gap: 12px; box-shadow: 6px 6px 0 var(--blue); }
   .figura img { width: 100%; height: auto; border: 1px solid var(--rule); }
