@@ -1,0 +1,13 @@
+---
+// Pássaro de origami do IDFT em facetas. variante: "azul" (padrão) ou "claro" (sobre fundo escuro).
+interface Props { variante?: 'azul' | 'claro'; contorno?: string; espessura?: number; class?: string; rotulo?: string }
+const { variante = 'azul', contorno = '#FFFFFF', espessura = 4, class: cls, rotulo } = Astro.props;
+const pal = variante === 'claro'
+  ? ['#8FB4F0', '#4B86E6', '#1755C5', '#8FB4F0', '#DCE8FB', '#4B86E6']
+  : ['#4B86E6', '#1755C5', '#0B2A6B', '#4B86E6', '#8FB4F0', '#1755C5'];
+const pts = ['32,25 113.5,58.5 82.5,115', '113.5,58.5 155.5,134 82.5,115', '128.9,86.2 159.5,60.5 155.5,134',
+  '159.5,60.5 195.5,80.3 159,98', '82.5,115 155.5,134 113.5,176.5', '82.5,115 113.5,176.5 66.5,224.5'];
+---
+<svg viewBox="26 19 176 212" class={cls} stroke={contorno} stroke-width={espessura} stroke-linejoin="round" role={rotulo ? 'img' : undefined} aria-label={rotulo} aria-hidden={rotulo ? undefined : 'true'}>
+  {pts.map((p, i) => <polygon points={p} fill={pal[i]} />)}
+</svg>

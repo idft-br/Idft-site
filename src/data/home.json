@@ -1,0 +1,253 @@
+{
+ "hero": {
+  "chip": "INSTITUTO PELO DESENVOLVIMENTO FISCAL E TRANSPARÊNCIA",
+  "titulo": "Entender o que o Estado arrecada e gasta é o passo 01 de um futuro digno",
+  "texto": "Sem informação o debate público se perde em afirmações vazias, afastando o interesse na melhoria de vida do eleitor como base da conquista do voto.",
+  "botao": "Conheça nossa atuação"
+ },
+ "diagonal": {
+  "chip": "[ Projeto Diagonal ]",
+  "titulo": "<i>Dinheiro na mão é vendaval?</i> o preço social do <i>controle sobre os controles</i>",
+  "texto": "<b>Um estado em perspectiva</b>: opacidade e um universo jurídico contaminado transformando o dobro de recursos em um problema à coletividade no Pará.",
+  "botoes": [
+   "Conheça nossas iniciativas",
+   "Visualize e baixe os dados"
+  ],
+  "numeros": [
+   {
+    "n": "+ de 100%",
+    "l": "Aumento <b>real</b> da arrecadação"
+   },
+   {
+    "n": "[+ de 150%]",
+    "l": "Aumento do valor pago às OSS entre 2018-21, de 0,6 para 1,7bi"
+   },
+   {
+    "n": "[0]",
+    "l": "Nenhum aumento no volume de serviços nem melhora em rankings"
+   }
+  ],
+  "atualizado": "Atualizado em 06.10.26"
+ },
+ "temas": {
+  "titulo": "Temas",
+  "texto": "Temas disponibilizados um a um, não necessariamente na ordem.",
+  "cards": [
+   {
+    "n": "01",
+    "titulo": "Visão geral",
+    "linha": "Arrecadação excepcional, abandono idem: a tragédia os comuns.",
+    "img": "01-visao-geral"
+   },
+   {
+    "n": "02",
+    "titulo": "Atuação no campo",
+    "linha": "Incêndios de barracos, desmatamento, trabalho escravo e milícias em ação nos “presentes” dados pelo estado.",
+    "img": "02-atuacao-no-campo"
+   },
+   {
+    "n": "03",
+    "titulo": "Saneamento",
+    "linha": "A tragédia do saneamento aprofundada sem qualquer pudor em termos escancarados.",
+    "img": "03-saneamento"
+   },
+   {
+    "n": "04",
+    "titulo": "Bora Belém e a fome",
+    "linha": "A agressão dolosamente inconstitucional, cruel e covarde à renda de 80 mil pessoas pobres.",
+    "img": "04-bora-belem"
+   },
+   {
+    "n": "05",
+    "titulo": "Ocultação bilionária, Master e o Banpará",
+    "linha": "Ocultação bilionária nas estruturas do Master, controle do Banpará e riscos.",
+    "img": "05-master-banpara"
+   },
+   {
+    "n": "06",
+    "titulo": "Seduc, a <i>nova Sespa</i>",
+    "linha": "Desprezo pela educação e o cassetete cassetete como ritual de batismo na \"Nova Sespa\" de contratos bilionários.",
+    "img": "06-seduc"
+   },
+   {
+    "n": "07",
+    "titulo": "Transparência",
+    "linha": "A opacidade como elemento fundamental do modelo.",
+    "img": "07-transparencia"
+   },
+   {
+    "n": "08",
+    "titulo": "Saúde e pandemia",
+    "linha": "A apropriação bilionária de verbas da saúde como base de lançamento da expansão.",
+    "img": "08-saude"
+   },
+   {
+    "n": "09",
+    "titulo": "Municípios vassalos",
+    "linha": "O poder excessivo no estado como ferramenta de coação e imposição de custos aos municípios.",
+    "img": "09-municipios"
+   },
+   {
+    "n": "10",
+    "titulo": "A organização central",
+    "linha": "Ordenador, beneficiário e controle no mesmo endereço, em voracidade ímpar e sem freios.",
+    "img": "10-organizacao-central"
+   },
+   {
+    "n": "11",
+    "titulo": "Jurídico",
+    "linha": "A atuação de quem não tem voto no intuito de fazer irrelevante o eleitor.",
+    "img": "11-juridico"
+   },
+   {
+    "n": "12",
+    "titulo": "Impunidade e caminhos",
+    "linha": "A armadilha é profunda, não há caminho simples e a mobilização social é o primeiro passo.",
+    "img": "12-impunidade"
+   }
+  ]
+ },
+ "videos": {
+  "rotulo": "VER. COMPREENDER. ACOMPANHAR.",
+  "titulo": "Investigações em vídeo.",
+  "serie": "Explore a série",
+  "destaque": {
+   "img": "01-visao-geral",
+   "capa": [
+    "O dinheiro é público.",
+    "O interesse também."
+   ],
+   "topo": [
+    "IDFT",
+    "PROJETO DIAGONAL"
+   ],
+   "base": "O PARÁ EM PERSPECTIVA",
+   "aria": "Assistir: O dinheiro é público. O interesse também.",
+   "rotulo": "VISÃO GERAL · PROJETO DIAGONAL",
+   "titulo": "Para onde vai o dinheiro público no Pará?",
+   "texto": "Como uma arrecadação excepcional pode entregar resultados piores? um raio-X das receitas e gastos que diz muito sobre a importância do debate público informado.",
+   "botao": "Ver prévia da capa"
+  },
+  "outros": [
+   {
+    "img": "07-transparencia",
+    "capa": [
+     "O que não",
+     "se pode ver."
+    ],
+    "rotulo": "TRANSPARÊNCIA · PROJETO DIAGONAL",
+    "titulo": "O acelerado esvaziamento da informação publicamente disponível, na contramão do movimento nacional"
+   },
+   {
+    "img": "08-saude",
+    "capa": [
+     "Do contrato",
+     "ao cuidado."
+    ],
+    "rotulo": "SAÚDE PÚBLICA · PROJETO DIAGONAL",
+    "titulo": "Com o mundo jurídico como aliado, as OSS na saúde saem de 0,6 para 1,7 bi em 3 anos - e entregando menos"
+   },
+   {
+    "img": "03-saneamento",
+    "capa": [
+     "O direito",
+     "que <mark>não chega.</mark>"
+    ],
+    "rotulo": "SANEAMENTO BÁSICO · PROJETO DIAGONAL",
+    "titulo": "No estado de pior saneamento, uma atuação sem qualquer resquício de interesse público agrava o cenário"
+   }
+  ],
+  "nota": "Estudo da apresentação da série: capas e títulos demonstrativos."
+ },
+ "iniciativas": {
+  "rotulo": "DA ANÁLISE À ATUAÇÃO",
+  "titulo": "Iniciativas",
+  "link": "Ver as 10 iniciativas",
+  "itens": [
+   {
+    "img": "iniciativa-1",
+    "rotulo": "A primeira ação popular, em 2020",
+    "titulo": "A primeira Ação Popular",
+    "texto": "Conheça a ação que poderia ter evitado o dano coletivo, e as razões pelas quais o segue negado o levantamento do sigilo."
+   },
+   {
+    "img": "iniciativa-2",
+    "rotulo": "Iniciativa 2 · [nome]",
+    "titulo": "A ORCRIM exposta em 2022, na base da <i>Operação Fratria</i>",
+    "texto": "Um retrato minucioso e profundo de uma atuação cuja continuidade inviabiliza qualquer expectativa de um futuro melhor."
+   },
+   {
+    "img": "iniciativa-3",
+    "rotulo": "Iniciativa 3 · [nome]",
+    "titulo": "As Notas Técnicas da CGU",
+    "texto": "Veja as 6 Notas Técnicas da CGU, que confirmam todas as ilegalidades apontadas na denúncia, deixando absolutamente clara a atuação de órgãos estaduais."
+   }
+  ]
+ },
+ "canal": {
+  "rotulo": "CANAL SEGURO DE INFORMAÇÕES",
+  "titulo": "Você tem provas de desvios e ilicitudes no Pará?",
+  "texto": "Um canal seguro criptografado para envio de informações e documentos importantes.",
+  "marcas": [
+   "Criptografia de ponta a ponta",
+   "Sem registro de IP",
+   "Proteção à fonte"
+  ],
+  "botoes": [
+   "Enviar informação com segurança [Breve]",
+   "Saiba mais sobre o funcionamento do sistema"
+  ]
+ },
+ "dados": {
+  "rotulo": "DADOS",
+  "titulo": "Painéis e bases para consulta [Breve]",
+  "nota": "Em preparação · exportação em CSV e Excel",
+  "paineis": [
+   "Arrecadação",
+   "Despesas",
+   "Dados sociais",
+   "Outros"
+  ]
+ },
+ "boletim": {
+  "titulo": "Um olhar independente e rigoroso, na sua caixa de entrada.",
+  "texto": "Semanalmente, novas informações, iniciativas e dados em seu e-mail.",
+  "botao": "Assinar",
+  "placeholder": "seu@email.com"
+ },
+ "rodape": {
+  "instituto": "Instituto pelo Desenvolvimento Fiscal e Transparência",
+  "colunas": [
+   {
+    "titulo": "PROJETO DIAGONAL",
+    "links": [
+     "Os 12 temas",
+     "Iniciativas",
+     "Dados"
+    ]
+   },
+   {
+    "titulo": "INSTITUTO",
+    "links": [
+     "Sobre",
+     "Equipe e conselho",
+     "Transparência do IDFT",
+     "Apoie"
+    ]
+   },
+   {
+    "titulo": "CONTATO",
+    "links": [
+     "contato",
+     "Denuncie com segurança",
+     "Imprensa"
+    ]
+   }
+  ],
+  "base": [
+   "© 2026 IDFT · Conteúdo sob licença CC BY 4.0, salvo indicação",
+   "Política de privacidade · Acessibilidade"
+  ]
+ },
+ "_fonte": "Gerado de HomeV3B.dc.html (canvas de design). Não editar à mão: rode a extração de novo."
+}

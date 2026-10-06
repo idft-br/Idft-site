@@ -10,6 +10,12 @@ Site estático construído com [Astro](https://astro.build). Conteúdo em Markdo
 - **Imagens** — `public/img/`. As 24 colagens dos temas estão em `public/img/temas/`.
 - **Vídeo da home** — em `src/pages/index.astro`, troque `<VideoPlaceholder />` por `<VideoPlaceholder youtubeId="ID_DO_VIDEO" />`.
 
+## Lançamento só com a Home (out/2026)
+
+- A Home (`src/pages/index.astro`) usa o layout B++ (`src/layouts/Site.astro`, `src/styles/site.css`) e lê os textos de `src/data/home.json`, extraído do canvas de design (artboard *Home v3 · layout B++*). Para atualizar os textos, extraia de novo a partir do canvas em vez de editar o JSON à mão.
+- As demais páginas continuam no repositório, mas fora do ar: em `src/pages`, arquivos e pastas com prefixo `_` (ex.: `_temas/`, `_sobre.astro`) não são publicados pelo Astro. Para pôr uma página no ar, basta tirar o `_` do nome.
+- Fontes servidas pelo próprio site (pacotes `@fontsource`), sem Google Fonts.
+
 ## Rodar localmente
 
 ```bash
